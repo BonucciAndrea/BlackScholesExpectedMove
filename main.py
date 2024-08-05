@@ -80,14 +80,11 @@ implied_vol_put = black_scholes_volatility(stock.history(period="1d")['Close'].i
 print(f"Implied volatility of call: {implied_vol_call*100:.2f}%")
 print(f"Implied volatility of put: {implied_vol_put*100:.2f}%")
 
-#Average implied volatility
-average_implied_vol = (implied_vol_call + implied_vol_put) / 2
-
 #Expected move calculation
 if time_to_expiration < 0:
     time_to_expiration = abs(time_to_expiration)
-expected_move_high = stock.history(period="1d")['Close'].iloc[0] * math.exp(average_implied_vol * math.sqrt(time_to_expiration))
-expected_move_low = stock.history(period="1d")['Close'].iloc[0] / math.exp(average_implied_vol * math.sqrt(time_to_expiration))
+expected_move_high = stock.history(period="1d")['Close'].iloc[0] * math.exp(implied_vol_call * math.sqrt(time_to_expiration))
+expected_move_low = stock.history(period="1d")['Close'].iloc[0] / math.exp(implied_vol_put * math.sqrt(time_to_expiration))
 
 print(f"{stock.info['longName'].upper()} price: {stock.history(period='1d')['Close'].iloc[0]:.2f}")
 print(f"Expected move high: {expected_move_high:.2f}. Expected move low: {expected_move_low:.2f}")
