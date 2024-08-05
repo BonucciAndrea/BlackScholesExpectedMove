@@ -87,4 +87,4 @@ expected_move_high = stock.history(period="1d")['Close'].iloc[0] * math.exp(impl
 expected_move_low = stock.history(period="1d")['Close'].iloc[0] / math.exp(implied_vol_put * math.sqrt(time_to_expiration))
 
 print(f"{stock.info['longName'].upper()} price: {stock.history(period='1d')['Close'].iloc[0]:.2f}")
-print(f"Expected move high: {expected_move_high:.2f}. Expected move low: {expected_move_low:.2f}")
+print(f"Expected move high of {abs(stock.history(period='1d')['Close'].iloc[0] - expected_move_high):.2f} to : {expected_move_high:.2f}. Expected move low of {stock.history(period='1d')['Close'].iloc[0] - expected_move_low:.2f} to: {expected_move_low:.2f}")
