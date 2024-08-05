@@ -3,8 +3,6 @@ import pandas as pd
 import yfinance as yf
 import datetime
 
-print('\n'*80)
-
 interest_free_rate = yf.download("^IRX")["Adj Close"] 
 interest_free_rate = interest_free_rate.iloc[-1]/100
 
